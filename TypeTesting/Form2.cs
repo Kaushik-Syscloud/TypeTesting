@@ -90,20 +90,15 @@ by self-employed (freelance) editors.";
         }
 
 
-        static bool EqualsExcludingWhitespace(String a, String b)
-        {
-            return a.Where(c => !Char.IsWhiteSpace(c))
-               .SequenceEqual(b.Where(c => !Char.IsWhiteSpace(c)));
-        }
-
-
         private string evaluate_result(int time_remaining, string typed_text)
         {
             total_time = minutes * 60;
-            decimal test_time = (Convert.ToDecimal(total_time) - Convert.ToDecimal(time_remaining))/ Convert.ToDecimal(60);
+            int test_time_seconds = total_time - time_remaining;
+            decimal test_time_minutes = (Convert.ToDecimal(total_time) - Convert.ToDecimal(time_remaining))/ Convert.ToDecimal(60);
             Debug.WriteLine("TotalTime is =" + total_time);
             Debug.WriteLine("TimeRemaining is =" + time_remaining);
-            Debug.WriteLine("TestTime is =" + test_time);
+            Debug.WriteLine("TimeRemaining is =" + test_time_seconds.ToString() + " seconds");
+            Debug.WriteLine("TestTime is =" + test_time_minutes);
 
           
             MessageBox.Show(typed_text.ToString());
@@ -111,7 +106,7 @@ by self-employed (freelance) editors.";
             Debug.WriteLine("No. of words typed is =" + GetWordCount(typed_text));
             int gross_words = GetWordCount(typed_text);
             Debug.WriteLine("gross_words is =" + gross_words);
-            decimal GWPM = gross_words / test_time;
+            decimal GWPM = gross_words / test_time_minutes;
             Debug.WriteLine("GWPM is =" + GWPM);
 
             List<string> diff;
@@ -136,7 +131,7 @@ by self-employed (freelance) editors.";
 
             int net_words = GetWordCount(test_string) - diff.Count;
             Debug.WriteLine("net_words is =" + net_words);
-            decimal NWPM = net_words / test_time;
+            decimal NWPM = net_words / test_time_minutes;
             Debug.WriteLine("NWPM is =" + NWPM);
 
             int typing_accuracy = Convert.ToInt32(NWPM) * 100/ Convert.ToInt32(GWPM);
