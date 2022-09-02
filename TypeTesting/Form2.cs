@@ -104,6 +104,13 @@ by self-employed (freelance) editors.";
             MessageBox.Show(typed_text.ToString());
             Debug.WriteLine("Typed Text is =" + typed_text);
             Debug.WriteLine("No. of words typed is =" + GetWordCount(typed_text));
+            int countSpaces = typed_text.Count(Char.IsWhiteSpace);
+            Debug.WriteLine("countSpaces is =" + countSpaces);
+            int countWords = typed_text.Split().Length;
+            Debug.WriteLine("countWords is =" + countWords);
+            int typed_length = typed_text.Length;
+            Debug.WriteLine("TypedLength is =" + typed_length);
+
             int gross_words = GetWordCount(typed_text);
             Debug.WriteLine("gross_words is =" + gross_words);
             decimal GWPM = gross_words / test_time_minutes;
@@ -168,7 +175,8 @@ by self-employed (freelance) editors.";
         private void button2_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show("Are you sure to finish the test ??", "Confirm your Submission!!", MessageBoxButtons.YesNo);
-            
+            MessageBox.Show("Total Characters are:" + textBox1.Text.Length);
+
             if (confirmResult == DialogResult.Yes)
             {
                 // If 'Yes', do something here.
