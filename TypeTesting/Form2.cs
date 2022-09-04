@@ -111,7 +111,8 @@ by self-employed (freelance) editors.";
             int typed_length = typed_text.Length;
             Debug.WriteLine("TypedLength is = " + typed_length);
 
-            int gross_words = GetWordCount(typed_text);
+            //int gross_words = GetWordCount(typed_text);
+            decimal gross_words = typed_length / 5;
             Debug.WriteLine("gross_words is = " + gross_words);
             decimal GWPM = gross_words / test_time_minutes;
             Debug.WriteLine("GWPM is = " + GWPM);
