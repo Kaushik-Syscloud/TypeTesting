@@ -95,27 +95,30 @@ by self-employed (freelance) editors.";
             total_time = minutes * 60;
             int test_time_seconds = total_time - time_remaining;
             decimal test_time_minutes = (Convert.ToDecimal(total_time) - Convert.ToDecimal(time_remaining))/ Convert.ToDecimal(60);
-            Debug.WriteLine("TotalTime is =" + total_time);
-            Debug.WriteLine("TimeRemaining is =" + time_remaining);
-            Debug.WriteLine("TimeRemaining is =" + test_time_seconds.ToString() + " seconds");
-            Debug.WriteLine("TestTime is =" + test_time_minutes);
+            Debug.WriteLine("TotalTime is =" + total_time + " seconds");
+            Debug.WriteLine("TimeRemaining is =" + time_remaining + " seconds");
+            Debug.WriteLine("Time Utilised is =" + test_time_seconds.ToString() + " seconds");
+            Debug.WriteLine("TestTime is =" + test_time_minutes + " minutes");
 
           
             MessageBox.Show(typed_text.ToString());
-            Debug.WriteLine("Typed Text is =" + typed_text);
-            Debug.WriteLine("No. of words typed is =" + GetWordCount(typed_text));
+            Debug.WriteLine("Typed Text is == " + typed_text);
+            Debug.WriteLine("No. of words typed is = " + GetWordCount(typed_text));
             int countSpaces = typed_text.Count(Char.IsWhiteSpace);
-            Debug.WriteLine("countSpaces is =" + countSpaces);
+            Debug.WriteLine("countSpaces is = " + countSpaces);
             int countWords = typed_text.Split().Length;
-            Debug.WriteLine("countWords is =" + countWords);
+            Debug.WriteLine("countWords is = " + countWords);
             int typed_length = typed_text.Length;
-            Debug.WriteLine("TypedLength is =" + typed_length);
+            Debug.WriteLine("TypedLength is = " + typed_length);
 
             int gross_words = GetWordCount(typed_text);
-            Debug.WriteLine("gross_words is =" + gross_words);
+            Debug.WriteLine("gross_words is = " + gross_words);
             decimal GWPM = gross_words / test_time_minutes;
-            Debug.WriteLine("GWPM is =" + GWPM);
+            Debug.WriteLine("GWPM is = " + GWPM);
 
+            //
+            // get the diff between 2 strings
+            //
             List<string> diff;
             IEnumerable<string> set1 = test_string.Split(' ').Distinct();
             IEnumerable<string> set2 = typed_text.Split(' ').Distinct();
@@ -131,13 +134,13 @@ by self-employed (freelance) editors.";
 
             //Debug.WriteLine(diff);
             Debug.WriteLine(String.Join("\n", diff));
-            Debug.WriteLine("diff in strings is =" + diff.Count);
+            Debug.WriteLine("diff in strings is = " + diff.Count);
             //Debug.WriteLine(String.Compare(test_string, typed_text));
             //Debug.WriteLine(EqualsExcludingWhitespace(test_string, typed_text));
 
 
             int net_words = GetWordCount(test_string) - diff.Count;
-            Debug.WriteLine("net_words is =" + net_words);
+            Debug.WriteLine("net_words is = " + net_words);
             decimal NWPM = net_words / test_time_minutes;
             Debug.WriteLine("NWPM is =" + NWPM);
 
