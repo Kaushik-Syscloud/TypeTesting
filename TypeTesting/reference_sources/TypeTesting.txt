@@ -1,0 +1,47 @@
+Editing is a growing field of work in the service industry. 
+Paid editing services may be provided by specialized editing firms or 
+by self-employed (freelance) editors.
+
+
+Editing is a growing field work provided by firms
+
+
+TotalTime is =60
+TimeRemaining is =45
+TimeRemaining is =15 seconds
+TestTime is =0.25
+
+
+Typed Text is =Editing is a growing field work provided by firms
+No. of words typed is =9
+countSpaces is =8
+countWords is =9
+TypedLength is =49
+gross_words is =9
+GWPM is =36
+
+
+    of
+in
+the
+service
+industry.
+
+Paid
+editing
+services
+may
+be
+specialized
+or
+
+by
+self-employed
+(freelance)
+editors.
+    
+    
+diff in strings is =16
+net_words is =10
+NWPM is =40
+Typing Accuracy is =111%
