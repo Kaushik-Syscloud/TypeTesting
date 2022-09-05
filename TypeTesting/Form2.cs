@@ -86,7 +86,19 @@ by self-employed (freelance) editors.";
         return wordCount;
     }
 
-    private string evaluate_result(int time_remaining, string typed_text)
+    public void PrintByteArray(byte[] bytes)
+    {
+        var sb = new StringBuilder("new byte[] { ");
+        foreach (var b in bytes)
+        {
+            sb.Append(b + " ");
+        }
+        sb.Append("}");
+        //Console.WriteLine(sb.ToString());
+        Debug.WriteLine(sb.ToString());
+    }
+
+        private string evaluate_result(int time_remaining, string typed_text)
     {
         total_time = minutes * 60;
         int test_time_seconds = total_time - time_remaining;
@@ -96,8 +108,13 @@ by self-employed (freelance) editors.";
         Debug.WriteLine("Time Utilised is =" + test_time_seconds.ToString() + " seconds");
         Debug.WriteLine("TestTime is =" + test_time_minutes + " minutes");
 
-        MessageBox.Show(typed_text.ToString());
+        //MessageBox.Show(typed_text.ToString());
         Debug.WriteLine("Typed Text is == " + typed_text);
+        
+        byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
+        //Debug.WriteLine("ASCII Typed Text is == " + Encoding.UTF8.GetString(ascii_typed_text));
+        PrintByteArray(ascii_typed_text);
+
         Debug.WriteLine("No. of words typed is = " + GetWordCount(typed_text));
         int countSpaces = typed_text.Count(Char.IsWhiteSpace);
         Debug.WriteLine("countSpaces is = " + countSpaces);
@@ -185,7 +202,6 @@ by self-employed (freelance) editors.";
         {
             // If 'No', do something here.
             timer1.Start();
-
         }
     }
 }
