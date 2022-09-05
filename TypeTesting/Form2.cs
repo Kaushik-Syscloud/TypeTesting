@@ -98,7 +98,15 @@ by self-employed (freelance) editors.";
         Debug.WriteLine(sb.ToString());
     }
 
-        private string evaluate_result(int time_remaining, string typed_text)
+    public void GetErrorCount(string typed_text, string test_string)
+    {
+        byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
+        byte[] ascii_test_string = Encoding.ASCII.GetBytes(test_string);
+        int error_count = 0;
+
+
+    }
+    private string evaluate_result(int time_remaining, string typed_text)
     {
         total_time = minutes * 60;
         int test_time_seconds = total_time - time_remaining;
@@ -181,6 +189,7 @@ by self-employed (freelance) editors.";
 
     private void label3_Click(object sender, EventArgs e)
     {
+
     }
 
     private void button2_Click(object sender, EventArgs e)
