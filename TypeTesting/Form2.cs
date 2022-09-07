@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Diagnostics;
 using System.Numerics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TypeTesting
 {
@@ -25,6 +26,8 @@ namespace TypeTesting
 Paid editing services may be provided by specialized editing firms or
 by self-employed (freelance) editors.";
 
+        
+
         public Form2()
         {
             InitializeComponent();
@@ -35,6 +38,11 @@ by self-employed (freelance) editors.";
             label2.Text = time_format(_ticks);
             // label2.Text = string str = time.ToString(@"hh\:mm\:ss\:fff");
             label3.Text = test_string.ToString();
+
+            //Setup events that listens on keypress
+            //textBox1.KeyDown += TextBox1_KeyDown;
+            textBox1.KeyPress += TextBox1_KeyPress;
+            //textBox1.KeyUp += TextBox1_KeyUp;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -213,5 +221,31 @@ by self-employed (freelance) editors.";
             timer1.Start();
         }
     }
-}
+
+        // Handle the KeyUp event to print the type of character entered into the control.
+        private void TextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine($"KeyUp code: {e.KeyCode}, value: {e.KeyValue}, modifiers: {e.Modifiers}" + "\r\n");
+        }
+
+        // Handle the KeyPress event to print the type of character entered into the control.
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Debug.WriteLine($"KeyPress keychar: {e.KeyChar}" + "\r\n");
+            //MessageBox.Show($"KeyPress keychar: {e.KeyChar}");
+            MessageBox.Show(e.KeyChar.ToString());
+            MessageBox.Show(Convert.ToBase64String(Encoding.ASCII.GetBytes(e.KeyChar.ToString())));
+        }
+
+        // Handle the KeyDown event to print the type of character entered into the control.
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine($"KeyDown code: {e.KeyCode}, value: {e.KeyValue}, modifiers: {e.Modifiers}" + "\r\n");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
