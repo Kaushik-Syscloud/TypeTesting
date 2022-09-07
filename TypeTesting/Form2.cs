@@ -45,12 +45,14 @@ by self-employed (freelance) editors.";
             //textBox1.KeyUp += TextBox1_KeyUp;
         }
 
+
         private void Form2_Load(object sender, EventArgs e)
         {
             label3.Hide();
             textBox1.Hide();
             button2.Hide();
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -62,171 +64,182 @@ by self-employed (freelance) editors.";
             
         }
 
-    private static string time_format(int secs)
-    {
-        int hours = secs / 3600;
-        int mins = (secs % 3600) / 60;
-        secs = secs % 60;
-        return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, mins, secs);
-    }
 
-    private static int GetWordCount(string text)
-    {
-        int wordCount = 0, index = 0;
-
-        // skip whitespace until first word
-        while (index < text.Length && char.IsWhiteSpace(text[index]))
-            index++;
-
-        while (index < text.Length)
+        private static string time_format(int secs)
         {
-            // check if current char is part of a word
-            while (index < text.Length && !char.IsWhiteSpace(text[index]))
-                index++;
+            int hours = secs / 3600;
+            int mins = (secs % 3600) / 60;
+            secs = secs % 60;
+            return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, mins, secs);
+        }
 
-            wordCount++;
 
-            // skip whitespace until next word
+        private static int GetWordCount(string text)
+        {
+            int wordCount = 0, index = 0;
+
+            // skip whitespace until first word
             while (index < text.Length && char.IsWhiteSpace(text[index]))
                 index++;
+
+            while (index < text.Length)
+            {
+                // check if current char is part of a word
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+
+                wordCount++;
+
+                // skip whitespace until next word
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+
+            return wordCount;
         }
 
-        return wordCount;
-    }
 
-    public void PrintByteArray(byte[] bytes)
-    {
-        var sb = new StringBuilder("new byte[] { ");
-        foreach (var b in bytes)
+        public void PrintByteArray(byte[] bytes)
         {
-            sb.Append(b + " ");
+            var sb = new StringBuilder("new byte[] { ");
+            foreach (var b in bytes)
+            {
+                sb.Append(b + " ");
+            }
+            sb.Append("}");
+            //Console.WriteLine(sb.ToString());
+            Debug.WriteLine(sb.ToString());
         }
-        sb.Append("}");
-        //Console.WriteLine(sb.ToString());
-        Debug.WriteLine(sb.ToString());
-    }
-
-    public void GetErrorCount(string typed_text, string test_string)
-    {
-        byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
-        byte[] ascii_test_string = Encoding.ASCII.GetBytes(test_string);
-        int error_count = 0;
 
 
-    }
-    private string evaluate_result(int time_remaining, string typed_text)
-    {
-        total_time = minutes * 60;
-        int test_time_seconds = total_time - time_remaining;
-        decimal test_time_minutes = (Convert.ToDecimal(total_time) - Convert.ToDecimal(time_remaining)) / Convert.ToDecimal(60);
-        Debug.WriteLine("TotalTime is =" + total_time + " seconds");
-        Debug.WriteLine("TimeRemaining is =" + time_remaining + " seconds");
-        Debug.WriteLine("Time Utilised is =" + test_time_seconds.ToString() + " seconds");
-        Debug.WriteLine("TestTime is =" + test_time_minutes + " minutes");
+        public void GetErrorCount(string typed_text, string test_string)
+        {
+            byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
+            byte[] ascii_test_string = Encoding.ASCII.GetBytes(test_string);
+            int error_count = 0;
 
-        //MessageBox.Show(typed_text.ToString());
-        Debug.WriteLine("Typed Text is == " + typed_text);
+
+        }
+
+
+        private string evaluate_result(int time_remaining, string typed_text)
+        {
+            total_time = minutes * 60;
+            int test_time_seconds = total_time - time_remaining;
+            decimal test_time_minutes = (Convert.ToDecimal(total_time) - Convert.ToDecimal(time_remaining)) / Convert.ToDecimal(60);
+            Debug.WriteLine("TotalTime is =" + total_time + " seconds");
+            Debug.WriteLine("TimeRemaining is =" + time_remaining + " seconds");
+            Debug.WriteLine("Time Utilised is =" + test_time_seconds.ToString() + " seconds");
+            Debug.WriteLine("TestTime is =" + test_time_minutes + " minutes");
+
+            //MessageBox.Show(typed_text.ToString());
+            Debug.WriteLine("Typed Text is == " + typed_text);
         
-        byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
-        //Debug.WriteLine("ASCII Typed Text is == " + Encoding.UTF8.GetString(ascii_typed_text));
-        PrintByteArray(ascii_typed_text);
+            byte[] ascii_typed_text = Encoding.ASCII.GetBytes(typed_text);
+            //Debug.WriteLine("ASCII Typed Text is == " + Encoding.UTF8.GetString(ascii_typed_text));
+            PrintByteArray(ascii_typed_text);
 
-        Debug.WriteLine("No. of words typed is = " + GetWordCount(typed_text));
-        int countSpaces = typed_text.Count(Char.IsWhiteSpace);
-        Debug.WriteLine("countSpaces is = " + countSpaces);
-        int countWords = typed_text.Split().Length;
-        Debug.WriteLine("countWords is = " + countWords);
-        int typed_length = typed_text.Length;
-        Debug.WriteLine("TypedLength is = " + typed_length);
+            Debug.WriteLine("No. of words typed is = " + GetWordCount(typed_text));
+            int countSpaces = typed_text.Count(Char.IsWhiteSpace);
+            Debug.WriteLine("countSpaces is = " + countSpaces);
+            int countWords = typed_text.Split().Length;
+            Debug.WriteLine("countWords is = " + countWords);
+            int typed_length = typed_text.Length;
+            Debug.WriteLine("TypedLength is = " + typed_length);
 
-        //int gross_words = GetWordCount(typed_text);
-        decimal gross_words = typed_length / 5;
-        Debug.WriteLine("gross_words is = " + gross_words);
-        decimal GWPM = gross_words / test_time_minutes;
-        Debug.WriteLine("GWPM is = " + GWPM);
+            //int gross_words = GetWordCount(typed_text);
+            decimal gross_words = typed_length / 5;
+            Debug.WriteLine("gross_words is = " + gross_words);
+            decimal GWPM = gross_words / test_time_minutes;
+            Debug.WriteLine("GWPM is = " + GWPM);
 
-        //
-        // get the diff between 2 strings
-        //
-        List<string> diff;
-        IEnumerable<string> set1 = test_string.Split(' ').Distinct();
-        IEnumerable<string> set2 = typed_text.Split(' ').Distinct();
+            //
+            // get the diff between 2 strings
+            //
+            List<string> diff;
+            IEnumerable<string> set1 = test_string.Split(' ').Distinct();
+            IEnumerable<string> set2 = typed_text.Split(' ').Distinct();
 
-        if (set2.Count() > set1.Count())
-        {
-            diff = set2.Except(set1).ToList();
+            if (set2.Count() > set1.Count())
+            {
+                diff = set2.Except(set1).ToList();
+            }
+            else
+            {
+                diff = set1.Except(set2).ToList();
+            }
+
+            //Debug.WriteLine(diff);
+            Debug.WriteLine(String.Join("\n", diff));
+            Debug.WriteLine("diff in strings is = " + diff.Count);
+            //Debug.WriteLine(String.Compare(test_string, typed_text));
+            //Debug.WriteLine(EqualsExcludingWhitespace(test_string, typed_text));
+
+            int net_words = GetWordCount(test_string) - diff.Count;
+            Debug.WriteLine("net_words is = " + net_words);
+            decimal NWPM = net_words / test_time_minutes;
+            Debug.WriteLine("NWPM is =" + NWPM);
+
+            int typing_accuracy = Convert.ToInt32(NWPM) * 100 / Convert.ToInt32(GWPM);
+            Debug.WriteLine("Typing Accuracy is =" + typing_accuracy + "%");
+
+            return time_remaining.ToString();
         }
-        else
+
+
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            diff = set1.Except(set2).ToList();
+            _ticks--;
+            label1.Text = _ticks.ToString();
+            label2.Text = time_format(_ticks);
+
+            if (_ticks == 0)
+            {
+                //this.Text = "Done";
+                timer1.Stop();
+                //MessageBox.Show(textBox1.Text);
+                MessageBox.Show("Time Out. The Test is Closed now");
+                evaluate_result(_ticks, textBox1.Text);
+                this.Close();
+            }
         }
 
-        //Debug.WriteLine(diff);
-        Debug.WriteLine(String.Join("\n", diff));
-        Debug.WriteLine("diff in strings is = " + diff.Count);
-        //Debug.WriteLine(String.Compare(test_string, typed_text));
-        //Debug.WriteLine(EqualsExcludingWhitespace(test_string, typed_text));
 
-        int net_words = GetWordCount(test_string) - diff.Count;
-        Debug.WriteLine("net_words is = " + net_words);
-        decimal NWPM = net_words / test_time_minutes;
-        Debug.WriteLine("NWPM is =" + NWPM);
-
-        int typing_accuracy = Convert.ToInt32(NWPM) * 100 / Convert.ToInt32(GWPM);
-        Debug.WriteLine("Typing Accuracy is =" + typing_accuracy + "%");
-
-        return time_remaining.ToString();
-    }
-
-    private void timer1_Tick(object sender, EventArgs e)
-    {
-        _ticks--;
-        label1.Text = _ticks.ToString();
-        label2.Text = time_format(_ticks);
-
-        if (_ticks == 0)
+        private void label3_Click(object sender, EventArgs e)
         {
-            //this.Text = "Done";
+
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             timer1.Stop();
-            //MessageBox.Show(textBox1.Text);
-            MessageBox.Show("Time Out. The Test is Closed now");
-            evaluate_result(_ticks, textBox1.Text);
-            this.Close();
-        }
-    }
+            var confirmResult = MessageBox.Show("Are you sure you want to finish this test ??", "Please Confirm", MessageBoxButtons.YesNo);
+            //MessageBox.Show("Total Characters are:" + textBox1.Text.Length);
 
-    private void label3_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void button2_Click(object sender, EventArgs e)
-    {
-        timer1.Stop();
-        var confirmResult = MessageBox.Show("Are you sure you want to finish this test ??", "Please Confirm", MessageBoxButtons.YesNo);
-        //MessageBox.Show("Total Characters are:" + textBox1.Text.Length);
-
-        if (confirmResult == DialogResult.Yes)
-        {
-            // If 'Yes', do something here.
-            timer1.Stop();
+            if (confirmResult == DialogResult.Yes)
+            {
+                // If 'Yes', do something here.
+                timer1.Stop();
             
-            //MessageBox.Show(textBox1.Text);
-            evaluate_result(_ticks, textBox1.Text);
-            this.Close();
+                //MessageBox.Show(textBox1.Text);
+                evaluate_result(_ticks, textBox1.Text);
+                this.Close();
+            }
+            else
+            {
+                // If 'No', do something here.
+                timer1.Start();
+            }
         }
-        else
-        {
-            // If 'No', do something here.
-            timer1.Start();
-        }
-    }
+
 
         // Handle the KeyUp event to print the type of character entered into the control.
         private void TextBox1_KeyUp(object sender, KeyEventArgs e)
         {
             Debug.WriteLine($"KeyUp code: {e.KeyCode}, value: {e.KeyValue}, modifiers: {e.Modifiers}" + "\r\n");
         }
+
 
         // Handle the KeyPress event to print the type of character entered into the control.
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -237,11 +250,13 @@ by self-employed (freelance) editors.";
             MessageBox.Show(Convert.ToBase64String(Encoding.ASCII.GetBytes(e.KeyChar.ToString())));
         }
 
+
         // Handle the KeyDown event to print the type of character entered into the control.
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             Debug.WriteLine($"KeyDown code: {e.KeyCode}, value: {e.KeyValue}, modifiers: {e.Modifiers}" + "\r\n");
         }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
